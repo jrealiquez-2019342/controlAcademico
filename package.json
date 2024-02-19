@@ -1,0 +1,32 @@
+{
+  "name": "controlacademico",
+  "version": "1.0.0",
+  "description": "El proyecto consiste en una aplicación de ambiente web (solamente Backend) la cual servirá para: poder llevar el Control de Alumnos de un Centro Educativo.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "Joshua Elí Isaac Realiquez Sosa",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.2",
+    "express": "^4.18.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.1.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.3"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrealiquez-2019342/controlAcademico.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jrealiquez-2019342/controlAcademico/issues"
+  },
+  "homepage": "https://github.com/jrealiquez-2019342/controlAcademico#readme"
+}
