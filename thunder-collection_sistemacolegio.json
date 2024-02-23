@@ -1,0 +1,461 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "sistemacolegio",
+    "dateExported": "2024-02-23T17:49:42.989Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "3ca18876-97fa-4d73-9bda-58ccdb9755e3",
+            "name": "STUDENT",
+            "containerId": "",
+            "created": "2024-02-22T14:51:42.551Z",
+            "sortNum": 10000,
+            "settings": {
+                "headers": [
+                    {
+                        "name": "token",
+                        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWQ4MDk3ODI2NWYwZGZlOTliODFhZDUiLCJ1c2VybmFtZSI6Imo4eHVhYWEiLCJuYW1lIjoiSm9zaHVhIEVsaSBJc2FhYyIsInJvbGUiOiJTVFVERU5UIiwiaWF0IjoxNzA4Njk5MjA5LCJleHAiOjE3MDg3MDI4MDl9.zt3tDUvoumSMARhJKeZzocfd9ssaqZaVp5WAN4y1GpA"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "41eecb36-7917-428c-b78c-c5b32402860d",
+            "name": "TEACHER",
+            "containerId": "",
+            "created": "2024-02-22T14:51:50.042Z",
+            "sortNum": 20000,
+            "settings": {
+                "headers": [
+                    {
+                        "name": "token",
+                        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWQ4YWRmZmM0Y2EwZjMyODE3NjdlZGEiLCJ1c2VybmFtZSI6InBhcm1hcyIsIm5hbWUiOiJQZWRybyBNYW51ZWwiLCJyb2xlIjoiVEVBQ0hFUiIsImlhdCI6MTcwODY5OTE1MywiZXhwIjoxNzA4NzAyNzUzfQ.FXnelmIs1NMC7smTBIs_FR36JqiNN3E-3IuksmaYWmU"
+                    }
+                ]
+            }
+        }
+    ],
+    "requests": [
+        {
+            "_id": "7a3c0e2e-55e0-42f5-8376-7308c9879e1c",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "3ca18876-97fa-4d73-9bda-58ccdb9755e3",
+            "name": "registerStudent",
+            "url": "/user/registerStudent",
+            "method": "POST",
+            "sortNum": 5000,
+            "created": "2024-02-19T13:30:22.191Z",
+            "modified": "2024-02-23T01:43:11.981Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Joshua Eli Isaac"
+                    },
+                    {
+                        "name": "surname",
+                        "value": "Realiquez Sosa"
+                    },
+                    {
+                        "name": "username",
+                        "value": "j8xuaaa"
+                    },
+                    {
+                        "name": "password",
+                        "value": "123"
+                    },
+                    {
+                        "name": "email",
+                        "value": "jrealiquez-2019342@kinal.edu.gt"
+                    },
+                    {
+                        "name": "phone",
+                        "value": "50524961"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "f0ad3dce-2403-42c7-9396-af4443d1ebf1",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "41eecb36-7917-428c-b78c-c5b32402860d",
+            "name": "registerTeacher",
+            "url": "/user/registerTeacher",
+            "method": "POST",
+            "sortNum": 5000,
+            "created": "2024-02-19T13:35:39.880Z",
+            "modified": "2024-02-23T02:55:06.117Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Pedro Manuel"
+                    },
+                    {
+                        "name": "surname",
+                        "value": "Armas Chang"
+                    },
+                    {
+                        "name": "username",
+                        "value": "parmas"
+                    },
+                    {
+                        "name": "password",
+                        "value": "321"
+                    },
+                    {
+                        "name": "email",
+                        "value": "parmas@kinal.org.gt"
+                    },
+                    {
+                        "name": "phone",
+                        "value": "98765432"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "f30a27ea-06ed-471b-9c5c-3c9e1173245c",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "3ca18876-97fa-4d73-9bda-58ccdb9755e3",
+            "name": "loginStudent",
+            "url": "/user/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-02-19T13:26:46.328Z",
+            "modified": "2024-02-23T02:21:42.328Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "username",
+                        "value": "j8xuaaa"
+                    },
+                    {
+                        "name": "password",
+                        "value": "123"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "a03c26e1-4a5b-4e64-8138-6812bdd13728",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "41eecb36-7917-428c-b78c-c5b32402860d",
+            "name": "loginTeacher",
+            "url": "/user/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-02-19T13:27:33.648Z",
+            "modified": "2024-02-23T02:17:38.049Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "username",
+                        "value": "jnoj"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "6b45dd17-da48-45c3-aa6f-d40682a8cb0f",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "41eecb36-7917-428c-b78c-c5b32402860d",
+            "name": "createCourse",
+            "url": "/course/create",
+            "method": "POST",
+            "sortNum": 12500,
+            "created": "2024-02-19T15:15:43.249Z",
+            "modified": "2024-02-23T02:20:17.931Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Practica Supervisada"
+                    },
+                    {
+                        "name": "section",
+                        "value": "A"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "343971c3-9210-4748-961e-6d064c7cf75d",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "41eecb36-7917-428c-b78c-c5b32402860d",
+            "name": "coursesAssigned",
+            "url": "/course/myCourses",
+            "method": "GET",
+            "sortNum": 13750,
+            "created": "2024-02-23T02:24:50.521Z",
+            "modified": "2024-02-23T02:24:50.521Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8eeefb73-dcb6-4c9d-ae6e-44e571c8a32a",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "41eecb36-7917-428c-b78c-c5b32402860d",
+            "name": "UpdateProfile Copy",
+            "url": "/user/update",
+            "method": "PUT",
+            "sortNum": 14062.5,
+            "created": "2024-02-23T15:08:58.917Z",
+            "modified": "2024-02-23T15:08:58.917Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Joshua Eli Isaac"
+                    },
+                    {
+                        "name": "password",
+                        "value": "123"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "84fe0070-4171-470a-9ede-cfdc6649d0bd",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "41eecb36-7917-428c-b78c-c5b32402860d",
+            "name": "DeleteUser Copy",
+            "url": "/user/delete",
+            "method": "DELETE",
+            "sortNum": 14375,
+            "created": "2024-02-23T02:47:45.765Z",
+            "modified": "2024-02-23T03:02:27.874Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "wordCheck",
+                        "value": "CONFIRM"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "e2ec406b-2945-44dc-aa4e-29dcf5cf6756",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "41eecb36-7917-428c-b78c-c5b32402860d",
+            "name": "showCourses Copy",
+            "url": "/course/courses",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2024-02-23T02:24:14.017Z",
+            "modified": "2024-02-23T02:24:14.017Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "9888801f-55ae-4b69-9fd9-7d432ce7b801",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "3ca18876-97fa-4d73-9bda-58ccdb9755e3",
+            "name": "coursesAssignedStudent",
+            "url": "/course/myCourses",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-02-19T13:46:56.500Z",
+            "modified": "2024-02-23T02:22:40.555Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b73d0c05-ac4a-46bc-bf58-b836daafd47d",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "3ca18876-97fa-4d73-9bda-58ccdb9755e3",
+            "name": "assignStudent",
+            "url": "/course/assignMe",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-02-19T14:24:26.306Z",
+            "modified": "2024-02-23T14:39:58.279Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "courses",
+                        "value": "65d8ae27c4ca0f3281767edf"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "5c322c15-7571-4d29-9f3d-a80e812fe671",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "41eecb36-7917-428c-b78c-c5b32402860d",
+            "name": "loginTeacher2",
+            "url": "/user/login",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-02-19T17:05:08.450Z",
+            "modified": "2024-02-23T02:20:34.005Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "username",
+                        "value": "parmas"
+                    },
+                    {
+                        "name": "password",
+                        "value": "321"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "6386fd3b-5287-45bb-a954-79cae01e2b82",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "3ca18876-97fa-4d73-9bda-58ccdb9755e3",
+            "name": "showCourses",
+            "url": "/course/courses",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-02-19T17:07:55.345Z",
+            "modified": "2024-02-23T02:23:20.617Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "79f7d610-9f69-4e52-8001-584f8dbb64f5",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "3ca18876-97fa-4d73-9bda-58ccdb9755e3",
+            "name": "DeleteUser",
+            "url": "/user/delete",
+            "method": "DELETE",
+            "sortNum": 110000,
+            "created": "2024-02-23T02:29:12.394Z",
+            "modified": "2024-02-23T02:37:55.706Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "wordCheck",
+                        "value": "CONFIRM"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "78618b56-7ac7-4a31-a0eb-f236fb017fbb",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "41eecb36-7917-428c-b78c-c5b32402860d",
+            "name": "UpdateCourse",
+            "url": "/course/updateCourse/65d8ae27c4ca0f3281767edf",
+            "method": "PUT",
+            "sortNum": 120000,
+            "created": "2024-02-23T14:36:59.377Z",
+            "modified": "2024-02-23T14:56:18.719Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "section",
+                        "value": "B"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "6dee28fb-8c7b-4b4d-bf75-7bad71eea104",
+            "colId": "d0d25376-50ad-4f6a-97ee-8bfba370292d",
+            "containerId": "3ca18876-97fa-4d73-9bda-58ccdb9755e3",
+            "name": "UpdateProfile",
+            "url": "/user/update",
+            "method": "PUT",
+            "sortNum": 130000,
+            "created": "2024-02-23T15:07:22.419Z",
+            "modified": "2024-02-23T15:08:43.483Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Joshua Eli Isaac"
+                    },
+                    {
+                        "name": "password",
+                        "value": "123"
+                    }
+                ]
+            },
+            "tests": []
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "localhost:2657"
+        },
+        "envId": "3074daf6-e35b-47ac-8b81-cc66156b29b8"
+    }
+}
