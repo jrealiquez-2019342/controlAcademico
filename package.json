@@ -21,6 +21,7 @@
     "nodemon": "^3.0.3"
   },
   "type": "module",
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jrealiquez-2019342/controlAcademico.git"

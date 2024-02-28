@@ -1,7 +1,7 @@
 'use strict'
-import {hash, compare} from 'bcrypt';
+import { hash, compare } from 'bcrypt';
 
-export const encrypt = (password)=>{
+export const encrypt = (password) => {
     try {
         return hash(password, 10);
     } catch (err) {
@@ -10,7 +10,7 @@ export const encrypt = (password)=>{
     }
 }
 
-export const checkPassword = async(password, hash)=>{
+export const checkPassword = async (password, hash) => {
     try {
         return await compare(password, hash);
     } catch (err) {
@@ -19,15 +19,22 @@ export const checkPassword = async(password, hash)=>{
     }
 }
 
-export const checkUpdate = (data, userId)=>{
-    if(userId){
-        if(
+export const checkUpdate = (data, userId) => {
+    if (userId) {
+        if (
             Object.entries(data).length === 0 ||
             data.password ||
             data.password == '' ||
             data.role ||
             data.role == ''
-        )return false;
+        ) return false;
+        return true;
+    } else {
+        if (
+            Object.entries(data).length === 0 ||
+            data.password ||
+            data.password == ''
+        ) return false;
         return true;
     }
 }

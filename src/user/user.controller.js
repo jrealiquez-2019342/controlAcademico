@@ -13,6 +13,14 @@ export const test = (req, res) => {
 export const registerTeacher = async (req, res) => {
     try {
         let data = req.body;
+
+        //validar que no haya un user existente
+        let findUser = await User.findOne({ username: data.user });
+        if (findUser) return res.status(409).send({ message: `Username already exists.` });
+        //validar que el correo no este en uso
+        let findEmail = await User.findOne({ email: data.email });
+        if (findEmail) return res.status(409).send({ message: `Email already in use.` })
+
         //encriptar la contrasenia
         data.password = await encrypt(data.password);
 
@@ -34,6 +42,14 @@ export const registerTeacher = async (req, res) => {
 export const registerStudent = async (req, res) => {
     try {
         let data = req.body;
+
+        //validar que no haya un user existente
+        let findUser = await User.findOne({ username: data.username });
+        if (findUser) return res.status(409).send({ message: `Username already exists.` });
+        //validar que el correo no este en uso
+        let findEmail = await User.findOne({ email: data.email });
+        if (findEmail) return res.status(409).send({ message: `Email already in use.` })
+
         //encriptar la contrasenia
         data.password = await encrypt(data.password);
 
@@ -51,92 +67,7 @@ export const registerStudent = async (req, res) => {
     }
 }
 
-export const courses = async (req, res) => {
-    try {
 
-        //recuperar el token
-        let { token } = req.headers;
-
-        //validar si es estudiante o profesor
-        let { role, uid } = jwt.verify(token, process.env.SECRET_KEY);
-        if (!role) return res.status(400).send({ message: `User role not found from token.` });
-
-        switch (role) {
-            case 'TEACHER':
-                let resultsTeacher = await Course.find({ teacher: uid });
-                return res.send({ resultsTeacher });
-            case 'STUDENT':
-                let resultsStudent = await Course.find().populate('teacher', ['name', 'surname', 'email']);
-                return res.send({ resultsStudent });
-        }
-
-
-    } catch (err) {
-        console.error(err);
-        return res.status(500).send({ message: `Error showing courses.` })
-    }
-}
-
-export const myCourses = async (req, res) => {
-    try {
-        //recuperar el token
-        let { token } = req.headers;
-
-        //validar si es estudiante o profesor
-        let { role, uid } = jwt.verify(token, process.env.SECRET_KEY);
-        if (!role) return res.status(400).send({ message: `User role not found from token.` });
-
-        switch (role) {
-            case 'TEACHER':
-                let resultsTeacher = await Course.find({ teacher: uid });
-                return res.send({ resultsTeacher });
-            case 'STUDENT':
-                let { courses } = await User.findOne({ _id: uid }).populate('courses', ['name', 'section']);
-                return res.send({ courses });
-        }
-    } catch (err) {
-        console.error(err);
-
-    }
-}
-
-export const assignMe = async (req, res) => {
-    try {
-        let { token } = req.headers;
-        let { courses } = req.body;
-        console.log(courses);
-        let { role, uid } = jwt.verify(token, process.env.SECRET_KEY);
-        if (!role) return res.status(400).send({ message: `User role not found from token.` });
-
-
-        //validar que tenga menos de tres cursos
-        let validate = await User.findOne({ _id: uid });
-        let pivotCourses = validate.courses;
-        if (pivotCourses.length >= 3) return res.status(400).send({ message: `You have reached the limit to courses` })
-
-        //validar que no me asigne a un curso ya asignado
-        if (validate.courses.includes(courses)) {
-            return res.status(400).send({ message: `You are already assigned to this course.` });
-        }
-
-        //validar que exista el curso
-        let course = await Course.findOne({ _id: courses });
-        if (!course) return res.status(404).send({ message: `Course not found.` });
-
-        //meter el id del curso a mis cursos (usuario)
-        let register = await User.findOneAndUpdate(
-            { _id: uid },
-            { $push: { courses } },
-            { new: true }
-        ).populate('courses', ['name', 'section']);
-        if (!register) return res.status(400).send({ message: `Error while assigning course to student.` })
-
-        return res.send({ message: `New course asigned`, course });
-    } catch (err) {
-        console.error(err);
-        return res.status(500).send({ message: `ERROR TO ASSIGN` })
-    }
-}
 
 export const login = async (req, res) => {
     try {
@@ -168,16 +99,29 @@ export const login = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        //extraer id
-        let { id } = req.params;
+        //extraer token
+        let { token } = req.headers;
+
+        //validar si es estudiante o profesor
+        let { role, uid } = jwt.verify(token, process.env.SECRET_KEY);
+
         //extraer datos a actualizar
         let data = req.body;
-        //validar si trae datos y si se pueden modificar.
-        if (!checkUpdate(data, id)) return res.status(400).send({ message: `Have submitted some data that cannot be updated or missing data` });
+
+        switch (role) {
+            case 'TEACHER':
+                //validar si trae datos y si se pueden modificar.
+                if (!checkUpdate(data, false)) return res.status(400).send({ message: `Have submitted some data that cannot be updated or missing data` });
+                break;
+            case 'STUDENT':
+                //validar si trae datos y si se pueden modificar.
+                if (!checkUpdate(data, uid)) return res.status(400).send({ message: `Have submitted some data that cannot be updated or missing data` });
+                break;
+        }
 
         //actualizar
         let updatedUser = await User.findOneAndUpdate(
-            { _id: id },
+            { _id: uid },
             data,
             { new: true }
         )
@@ -191,10 +135,9 @@ export const update = async (req, res) => {
 }
 
 
-export const deleteU = async () => {
+export const deleteU = async (req, res) => {
     try {
         let { token } = req.headers;
-        let { id } = req.params;
         let { wordCheck } = req.body;
         //validar si esta logeado
         if (!token) return res.status(401).send({ message: `Token is required. | Login required.` })
@@ -204,31 +147,40 @@ export const deleteU = async () => {
 
         switch (role) {
             case 'TEACHER':
-                // Eliminar al profesor y los cursos que tiene a su cargo
-                let deletedTeacher = await User.findOneAndDelete({ _id: id });
-                if (!deletedTeacher) return res.status(400).send({ message: `Teacher not found and not deleted.` });
 
                 //validar palabra de confirmacion
                 if (!wordCheck) return res.status(400).send({ message: `wordCheck IS REQUIRED.` });
                 if (wordCheck !== 'CONFIRM') return res.status(400).send({ message: `wordCheck must be -> CONFIRM` });
-                
-                // Eliminar los cursos del profesor
-                let deletedCourses = await Course.deleteMany({ teacher: id });
-                if (!deletedCourses) return res.status(400).send({ message: `Courses not found and not deleted.` });
+
+                // Encontrar los cursos del profesor
+                let coursesToDelete = await Course.find({ teacher: uid });
+
+                // Verificar si se encontraron cursos para eliminar
+                if (coursesToDelete.length === 0) return res.status(404).send({ message: `No courses found for teacher ${uid}.` });
 
                 // Desvincular a los alumnos de los cursos del profesor
-                await Promise.all(deletedCourses.map(async (course) => {
+                await Promise.all(coursesToDelete.map(async (course) => {
                     await User.updateMany({ courses: course._id }, { $pull: { courses: course._id } });
                 }));
 
+                // Eliminar los cursos del profesor
+                let deletedCourses = await Course.deleteMany({ teacher: uid });
+
+                // Eliminar al profesor
+                let deletedTeacher = await User.findOneAndDelete({ _id: uid });
+                if (!deletedTeacher) {
+                    return res.status(404).send({ message: `Teacher not found.` });
+                }
+
                 return res.send({ message: `Teacher with username @${deletedTeacher.username} deleted successfully along with associated courses.` });
+
             case 'STUDENT':
                 //validar palabra de confirmacion
-                if (!wordCheck) return res.status(400).send({ message: `wordCheck IS REQUIRED.` });
+                if (!wordCheck) return res.status(400).send({ message: `wordCheck in body IS REQUIRED.` });
                 if (wordCheck !== 'CONFIRM') return res.status(400).send({ message: `wordCheck must be -> CONFIRM` });
 
                 //eliminar (usuario)
-                let deleted = await User.findOneAndDelete({ _id: id });
+                let deleted = await User.findOneAndDelete({ _id: uid });
                 //verificar que se elimino
                 if (!deleted) return res.status(400).send({ message: `Profule not found and not deleted.` });
                 return res.send({ message: `Account with username @${deleted.username} deleted successfully.` });
